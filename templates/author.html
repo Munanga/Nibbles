@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Nibbles - {{ queryset.full_name }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <!-- Author picture -->
+        <div class="row" style="margin-top: 2%">
+            <div class="col-md-4 offset-md-2">
+                <figure class="figure">
+                    <div>
+                        <img src="/{{ queryset.image }}" class="figure-img img-fluid" alt="{{ queryset.full_name }}" style="width:350px;height:350px;">
+                    </div>
+                </figure>
+            </div>
+            <!-- About Author -->
+            <div class="col-md-4">
+                <h4>About the Author</h4>
+                <p align="justify">{{ queryset.about }}</p>
+            </div>
+        </div>
+
+        <!-- Books by Author -->
+
+        <h4 align="center">Books by {{ queryset.full_name }}</h4>
+
+        <hr size="5">
+        <div class="row">
+            <div class="col-md-4 offset-md-2">
+                {% for book in books_by_author %}
+                    <div class="col">
+                        <figure class="figure">
+                            <a href="{% url 'NibblesBookApp:get_book' book.id %}">
+                              <div class="nang">
+                              <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:132px;height:210px;">
+                              </div>
+                            </a>
+                            <figcaption class="figure-caption">
+                                <a href="{% url 'NibblesBookApp:get_book' book.id %}" style="color: black"><div align="left">{{ book.title }}</div></a>
+                                {{ book.date |date:'M Y' }}<br>
+                                <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

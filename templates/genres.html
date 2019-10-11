@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Nibbles - {{ queryset.title }}{% endblock %}
+
+{% block body %}
+
+    <h3 align="center" style="margin-top: 2%;margin-bottom: 2%">{{ genre }}</h3>
+
+
+    {% for book in queryset %}
+
+        <div class="row">
+            <div class="col-md-5" align="right">
+                <hr size="4" class="col-md-3" align="right">
+                <figure class="figure">
+                    <a href="{% url 'NibblesBookApp:get_book' book.id %}">
+                      <div class="nang">
+                      <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:132px;height:210px;">
+                      </div>
+                    </a>
+                    <figcaption class="figure-caption">
+                        {{ book.date |date:'M Y' }}<br>
+                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-md-7"><hr size="5">
+                <p>{{ book.description }}</p>
+            </div>
+        </div>
+
+        {% endfor %}
+
+{% endblock %}

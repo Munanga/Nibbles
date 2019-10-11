@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Nibbles - A place for book lovers{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+          <p class="lead mb-0"><a href="https://getbootstrap.com/docs/4.3/examples/blog/#" class="text-white font-weight-bold">Continue reading...</a></p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+    {% if queryset %}
+        {% for book in queryset %}
+            <div class="col">
+                <figure class="figure">
+                    <a href="{% url 'NibblesBookApp:get_book' book.id %}">
+                      <div class="nang">
+                      <img src="{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:132px;height:210px;">
+                      </div>
+                    </a>
+                    <figcaption class="figure-caption">
+                        <a href="{% url 'NibblesBookApp:get_book' book.id %}" style="color: black"><div align="left">{{ book.title }}</div></a>
+                        {{ book.date |date:'M Y' }}<br>
+                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
+                    </figcaption>
+                </figure>
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+

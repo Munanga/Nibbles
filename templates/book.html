@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Nibbles - {{ queryset.title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        {% if book %}
+            <!-- Display Book details -->
+            <div class="book_details">
+                <div class="row">
+                <!-- Display Book Image -->
+                    <div class="col-md-6">
+                        <div class="large_book_image">
+                            <figure class="figure">
+                                <div class="nang">
+                                  <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:290px;height:411px;"><br>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- Display details -->
+                    <div class="col-md-6">
+                        <span class="book_title">{{ book.title }}</span> <br> by
+                        <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author.full_name }}</a><br>
+                        <hr size="10">
+                        <span>Available Formats</span><br>
+
+                        <div class="details">
+                            <div class="row">
+                            {% for format in book_formats %}
+                                    <div class="col-sm-3">
+                                        <div class="format_border">
+                                            {{ format.format_type }}<br>
+                                            <div class="nang" style="color: red">{{ format.price }}</div>
+                                         </div>
+                                    </div>
+                            {% endfor %}
+                            </div>
+
+                        </div>
+                        <br>
+                        <span>Available at the following stores🏬:</span><br>
+                        <ul>
+                            {% for store in book.store.all %}
+                                <li>{{ store }}</li>
+                            {% endfor %}
+                        </ul>
+
+
+                        <hr size="10">
+                        <span style="color: steelblue"><a href="#reviews">{{ book.review_set.count }} Customer Reviews</a></span>
+                    </div>
+                </div>
+            </div>
+
+
+             <!-- Book Summary section -->
+            <br>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="jumbotron text-Black">
+                        <h2 class="book_text" align="center">Summary</h2>
+                        <p>{{ book.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <br>
+            <!-- Product Details -->
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h4 align="center">Product Details</h4>
+                        <p align="center">
+                            <table class="table col-md-4 offset-md-4">
+                              <thead>
+                                <tr>
+                                  <th scope="col">ISBN-13:</th>
+                                  <th scope="col">{{ book.isbn }}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">Publisher:</th>
+                                  <td>{{ book.publisher }}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Publication date:</th>
+                                  <td>{{ book.date|date:'M j Y' }}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Genre:</th>
+                                  <td>{{ book.genre }}</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Pages:</th>
+                                  <td>{{ book.pages }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <br>
+            <!-- Book reviews -->
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                   <h4 align="center" class="book_text" id="reviews">Reviews</h4>
+                    <hr size="10">
+                    <div class="row">
+
+                        {% for reviews in book_reviews %}
+                        <div class="col-md-6">
+                            <p align="justify"><img src="{% static 'images/profile/Avatar_empty.png' %}">&nbsp;{{ reviews.reviewer }}<br>
+                                {{ reviews.date| timesince }}
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p align="justify" style="font-size: smaller">{{ reviews.content }}</p>
+                                <hr size="10">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <!-- Other Books  -->
+             <div class="row">
+                 <div class="col-md-8 offset-md-2">
+                    <h4 align="center">You may also like:</h4>
+
+                     <div class="row justify-content-center">
+
+                        {% for book in recommended_books %}
+                            <div class="col">
+                                <figure class="figure">
+                                    <a href="{% url 'NibblesBookApp:get_book' book.id %}">
+                                      <div class="nang">
+                                      <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:132px;height:210px;">
+                                      </div>
+                                    </a>
+                                    <figcaption class="figure-caption">
+                                        {{ book.date |date:'M Y' }}<br>
+                                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        {% endfor %}
+
+                     </div>
+
+                 </div>
+             </div>
+
+        {% else %}
+            <p>Sorry cannot find the book you are looking for</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
