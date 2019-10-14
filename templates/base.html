@@ -20,7 +20,7 @@
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="body">
 
     <div class="container">
       <header class="blog-header py-3">
@@ -39,42 +39,40 @@
           </div>
         </div>
 
-  </header>
+      </header>
 
-  <div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="{% url 'NibblesBookApp:get_genres' 'Business' %}">Business</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">U.S.</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Technology</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Design</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Culture</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Business</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Politics</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Opinion</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Science</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Health</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Style</a>
-      <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Travel</a>
-    </nav>
-  </div>
+      <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+          <a class="p-2 text-muted" href="{% url 'NibblesBookApp:get_genres' 'Business' %}">Business</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">U.S.</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Technology</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Design</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Culture</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Business</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Politics</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Opinion</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Science</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Health</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Style</a>
+          <a class="p-2 text-muted" href="https://getbootstrap.com/docs/4.3/examples/blog/#">Travel</a>
+        </nav>
+      </div>
 
 
-   {% block body %}
+       {% block body %}
 
-   {% endblock %}
+       {% endblock %}
 
 
    </div>
 
 
     <!-- Page Footer -->
-
-    <footer class="footer mt-auto py-3">
-      <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+    <footer class="footer mt-auto py-2">
+      <div>
+        <span class="text-muted"><img src="{% static 'images/icon/1.png' %}" style="width:20px;height:20px;">Nibbles - A Munsaka project</span>
       </div>
     </footer>
-
     </body>
 
 </html>
