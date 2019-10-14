@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.urls import resolve
 from django.test import tag
 from NibblesBookApp import models
+from datetime import datetime
 
 @tag('all')
 class AllTests(TestCase):
@@ -11,6 +12,19 @@ class AllTests(TestCase):
                                                   first_name='Amy',
                                                   last_name='Newmark',
                                                   about='Good Author')
+        self.publisher = models.Publisher.objects.create(name="Book Publisher")
+        self.store = models.Store.objects.create(name="B&N")
+        self.book = models.Book.objects.create(image='static/images/books/HomeWork.jpg',
+                                               title='101',
+                                               author=self.author,
+                                               pages=342,
+                                               description='Stuff',
+                                               genre='love',
+                                               isbn=9783161484100,
+                                               publisher=self.publisher,
+                                               date=datetime.now(),
+                                               store=self.store )
+
 
     ###################### index page view tests #######################
 
@@ -38,6 +52,10 @@ class AllTests(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
 
+
+
+
+
     ############################ author page view tests #################################
 
     @tag('author')
@@ -52,7 +70,7 @@ class AllTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
     @tag('author')
-    def test_author_name_equal_index_url(self):
+    def test_author_name_equal_author_url(self):
         resolver = resolve('/nibbles/author/1')
         view_name = 'NibblesBookApp:get_author'
         self.assertEquals(resolver.view_name, view_name)
@@ -64,6 +82,11 @@ class AllTests(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'author.html')
 
+
+
     ################################### Book page view tests ################################
-    # genres page view tests
-    # about page view tests
+
+    ################################### genres page view tests ##############################
+
+
+    ################################### about page view tests ###############################
