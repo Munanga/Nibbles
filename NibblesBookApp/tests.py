@@ -4,6 +4,9 @@ from django.urls import resolve
 from django.test import tag
 from NibblesBookApp import models
 from datetime import datetime
+from django.utils import timezone
+
+
 
 @tag('all')
 class AllTests(TestCase):
@@ -22,8 +25,16 @@ class AllTests(TestCase):
                                                genre='love',
                                                isbn=9783161484100,
                                                publisher=self.publisher,
-                                               date=datetime.now(),
-                                               store=self.store )
+                                               date=datetime.now(tz=timezone.utc)
+                                              )
+
+        self.review = models.Review.objects.create(reviewer='Slim',
+                                                   date=datetime.now(tz=timezone.utc),
+                                                   book=self.book,
+                                                   content="Good")
+        self.format = models.Format.objects.create(format_type='Slim',
+                                                   book=self.book,
+                                                   price=45.5)
 
 
     ###################### index page view tests #######################
@@ -65,7 +76,7 @@ class AllTests(TestCase):
 
     @tag('author')
     def test_author_view_url_by_name(self):
-        author_url = reverse('NibblesBookApp:get_author', kwargs={'author_id':self.author.id})
+        author_url = reverse('NibblesBookApp:get_author', kwargs={'author_id': self.author.id})
         response = self.client.get(author_url)
         self.assertEquals(response.status_code, 200)
 
@@ -77,14 +88,42 @@ class AllTests(TestCase):
 
     @tag('author')
     def test_author_view_uses_correct_template(self):
-        url = reverse('NibblesBookApp:get_author', kwargs={'author_id':self.author.id})
+        url = reverse('NibblesBookApp:get_author', kwargs={'author_id': self.author.id})
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'author.html')
 
 
 
+
     ################################### Book page view tests ################################
+
+    @tag('book')
+    def test_book_view_status_code(self):
+        response = self.client.get('/nibbles/book/{0}'.format(self.book.id))
+        self.assertEquals(response.status_code, 200)
+
+    @tag('book')
+    def test_book_view_url_by_name(self):
+        book_url = reverse('NibblesBookApp:get_book', kwargs={'book_id': self.author.id})
+        response = self.client.get(book_url)
+        self.assertEquals(response.status_code, 200)
+
+    @tag('book')
+    def test_book_name_equal_author_url(self):
+        resolver = resolve('/nibbles/book/1')
+        view_name = 'NibblesBookApp:get_book'
+        self.assertEquals(resolver.view_name, view_name)
+
+    @tag('book')
+    def test_book_view_uses_correct_template(self):
+        url = reverse('NibblesBookApp:get_book', kwargs={'book_id': self.book.id})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'book.html')
+
+
+
 
     ################################### genres page view tests ##############################
 
