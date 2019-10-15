@@ -34,7 +34,7 @@ def get_author(request, author_id):
     return render(request, 'author.html', context)
 
 
-def get_genres(request, genre):
+def get_genre(request, genre):
     queryset = models.Book.objects.filter(genre=genre)
     context = {'queryset': queryset, 'genre': genre}
     return render(request, 'genres.html', context)
@@ -57,7 +57,7 @@ def search(request):
 
 def about(request):
     template = 'about.html'
-    return render(request,template)
+    return render(request, template)
 
 
 def contact(request):
