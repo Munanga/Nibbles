@@ -24,7 +24,6 @@ def index(request):
         start += 6
         end += 6
 
-    print(book_in_fives)
     context = {'book_in_fives': book_in_fives}
     return render(request, 'index.html', context)
 

@@ -10,13 +10,13 @@ from django.utils import timezone
 @tag('all')
 class AllTests(TestCase):
     def setUp(self):
-        self.author = models.Author.objects.create(image='static/images/authors/Amy-Newmark.jpg',
-                                                  first_name='Amy',
-                                                  last_name='Newmark',
+        self.author = models.Author.objects.create(id=1,image='static/images/authors/FrancesHodgson.jpg',
+                                                  first_name='Frances',
+                                                  last_name='Hodgson',
                                                   about='Good Author')
-        self.publisher = models.Publisher.objects.create(name="Book Publisher")
-        self.store = models.Store.objects.create(name="B&N")
-        self.book = models.Book.objects.create(image='static/images/books/HomeWork.jpg',
+        self.publisher = models.Publisher.objects.create(id=1,name="Book Publisher")
+        self.store = models.Store.objects.create(id=1,name="B&N")
+        self.book = models.Book.objects.create(id=1,image='static/images/books/Shirley.jpg',
                                                title='101',
                                                author=self.author,
                                                pages=342,
@@ -27,11 +27,11 @@ class AllTests(TestCase):
                                                date=datetime.now(tz=timezone.utc)
                                               )
 
-        self.review = models.Review.objects.create(reviewer='Slim',
+        self.review = models.Review.objects.create(id=1,reviewer='Slim',
                                                    date=datetime.now(tz=timezone.utc),
                                                    book=self.book,
                                                    content="Good")
-        self.format = models.Format.objects.create(format_type='Slim',
+        self.format = models.Format.objects.create(id=1,format_type='Slim',
                                                    book=self.book,
                                                    price=45.5)
 
