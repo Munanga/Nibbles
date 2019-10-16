@@ -27,26 +27,29 @@
 
         <hr size="5">
         <div class="row">
-            <div class="col-md-4 offset-md-2">
-                {% for book in books_by_author %}
-                    <div class="col">
-                        <figure class="figure">
-                            <a href="{% url 'NibblesBookApp:get_book' book.id %}">
-                              <div class="nang">
-                              <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:132px;height:210px;">
-                              </div>
-                            </a>
-                            <figcaption class="figure-caption">
-                                <a href="{% url 'NibblesBookApp:get_book' book.id %}" style="color: black"><div align="left">{{ book.title }}</div></a>
-                                {{ book.date |date:'M Y' }}<br>
-                                <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
-                            </figcaption>
-                        </figure>
-                    </div>
+                 <div class="col-md-8 offset-md-2">
 
-                {% endfor %}
-            </div>
-        </div>
+                     <div class="row justify-content-center">
+
+                        {% for book in books_by_author %}
+                            <div class="col">
+                                <figure class="figure">
+                                    <a href="{% url 'NibblesBookApp:get_book' book.id %}">
+                                      <div class="nang">
+                                      <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:132px;height:210px;">
+                                      </div>
+                                    </a>
+                                    <figcaption class="figure-caption">
+                                        {{ book.date |date:'M Y' }}<br>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        {% endfor %}
+
+                     </div>
+
+                 </div>
+             </div>
 
     </div>
 

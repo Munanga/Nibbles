@@ -151,7 +151,7 @@ class AllTests(TestCase):
         self.assertTemplateUsed(response, 'genres.html')
 
 
-    ################################### about page view tests ###############################
+    ''' about page view tests '''
 
     @tag('about')
     def test_about_view_status_code(self):

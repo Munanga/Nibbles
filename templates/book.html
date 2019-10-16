@@ -24,7 +24,7 @@
                     <!-- Display details -->
                     <div class="col-md-6">
                         <span class="book_title">{{ book.title }}</span> <br> by
-                        <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author.full_name }}</a><br>
+                        <a href="{% url 'NibblesBookApp:get_author' book.author_id %}">{{ book.author.full_name }}</a><br>
                         <hr size="10">
                         <span>Available Formats</span><br>
 
@@ -152,7 +152,7 @@
                                     </a>
                                     <figcaption class="figure-caption">
                                         {{ book.date |date:'M Y' }}<br>
-                                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
+                                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.author_id %}">{{ book.author }}</a></span>
                                     </figcaption>
                                 </figure>
                             </div>

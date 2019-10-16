@@ -1,9 +1,9 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
-from django.urls import reverse
 
 
 class Author(models.Model):
+    id = models.PositiveIntegerField(primary_key=True)
     image = models.CharField(max_length=50, default='static/images/authors/')
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
@@ -17,7 +17,7 @@ class Author(models.Model):
 
 
 class Publisher(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.PositiveIntegerField(primary_key=True)
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -25,6 +25,7 @@ class Publisher(models.Model):
 
 
 class Store(models.Model):
+    id = models.PositiveIntegerField(primary_key=True)
     name = models.CharField(max_length=80)
 
     def __str__(self):
@@ -32,6 +33,7 @@ class Store(models.Model):
 
 
 class Book(models.Model):
+    id = models.PositiveIntegerField(primary_key=True)
     image = models.CharField(max_length=300, default='static/images/books/')
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -48,6 +50,7 @@ class Book(models.Model):
 
 
 class Format(models.Model):
+    id = models.PositiveIntegerField(primary_key=True)
     format_type = models.CharField(max_length=40)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = MoneyField(max_digits=10, decimal_places=2, default_currency='USD')
@@ -57,6 +60,7 @@ class Format(models.Model):
 
 
 class Review(models.Model):
+    id = models.PositiveIntegerField(primary_key=True)
     reviewer = models.CharField(max_length=50)
     date = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
