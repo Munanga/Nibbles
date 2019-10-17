@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6=%rr!pgbg0ew4)h&h3&(3%u)6yf!#ou5571-w0_kbq%!$a9n5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["Munanga.pythonanywhere.com"]
 
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'NibblesBookApp',
-    
+
 ]
 
 MIDDLEWARE = [
