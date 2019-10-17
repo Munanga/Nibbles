@@ -2,14 +2,17 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from NibblesBookApp import models
 from django.db.models import Q
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from NibblesBookApp import serializers
+from rest_framework import status
 
 ''' generate the number of loops '''
 def generate_number_of_loops(num):
     if num % 5 == 0:
-        return num / 5
+        return num // 5
 
-    return int(num / 5) + 1
+    return int(num // 5) + 1
 
 ''' return a list of books in chunks by a certain number '''
 def return_books_by_number(queryset, number):
@@ -84,8 +87,28 @@ def about(request):
     return render(request, template)
 
 
-def contact(request):
-    pass
 
+
+######################### Rest functions #############################
+
+
+@api_view(['GET', 'POST'])
+def book_list(request):
+    if request.method == 'GET':
+        queryset = models.Book.objects.all()
+        serialize = serializers.BookSerializer(queryset, many=True)
+        return Response(serialize.data)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
+def author_list(request):
+    if request.method == 'GET':
+        queryset = models.Author.objects.all()
+        serialize = serializers.AuthorSerializer(queryset, many=True)
+        return Response(serialize.data)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

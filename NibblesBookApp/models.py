@@ -7,7 +7,7 @@ class Author(models.Model):
     image = models.CharField(max_length=50, default='static/images/authors/')
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
-    about = models.CharField(max_length=1000, default='None')
+    about = models.TextField(max_length=1000, default='None')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -38,7 +38,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     pages = models.PositiveSmallIntegerField()
-    description = models.CharField(max_length=700)
+    description = models.TextField(max_length=900)
     genre = models.CharField(max_length=30)
     isbn = models.BigIntegerField()
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
@@ -57,6 +57,8 @@ class Book(models.Model):
         for ratings in all_reviews:
             rating_sum = rating_sum + ratings.rating
 
+        if num_of_reviews == 0:
+            return "%.1f" % 0
         return "%.1f" % (rating_sum / num_of_reviews)
 
 

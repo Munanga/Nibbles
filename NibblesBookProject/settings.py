@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djmoney',
     'debug_toolbar',
+    'rest_framework',
     'NibblesBookApp',
     
 ]

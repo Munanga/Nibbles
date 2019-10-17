@@ -4,12 +4,30 @@
 
 {% block body %}
 
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-          <p class="lead mb-0"><a href="https://getbootstrap.com/docs/4.3/examples/blog/#" class="text-white font-weight-bold">Continue reading...</a></p>
+    <div class="jumbotron p-4 p-md-7 text-white rounded bg-dark">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="display-4 font-italic" align="center">Our featured book</h1>
+            </div>
+            <div class="col-md-6">
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <img src="{% static 'images/books/JaneEyre.jpg' %}" style="width:160px;height:240px;" class="nang">
+            </div>
+            <div class="col-md-10">
+                <p class="lead my-3">
+                    <h4 style="">Jane Eyre</h4>
+                     Orphaned as a child, Jane has felt an outcast her whole young life. Her courage is tested once again when she arrives at Thornfield Hall, where she has been hired by the brooding, proud Edward Rochester to care for his ward Adèle.
+                      Jane finds herself drawn to his troubled yet kind spirit. She falls in love. Hard.
+                  </p>
+                  <p class="lead mb-0"><a href="{% url 'NibblesBookApp:get_book' 12 %}" class="text-white font-weight-bold">Read more..</a></p>
+            </div>
+        </div>
+
+
     </div>
 
 
