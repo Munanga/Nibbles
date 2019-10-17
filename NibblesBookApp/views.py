@@ -11,24 +11,29 @@ def generate_number_of_loops(num):
 
     return int(num / 5) + 1
 
-
-def index(request):
-    queryset = models.Book.objects.all()
-    book_in_fives = []
+''' return a list of books in chunks by a certain number '''
+def return_books_by_number(queryset, number):
+    book_in_number = []
     start = 0
-    end = 6
+    end = number
     loops = generate_number_of_loops(len(queryset))
 
     for i in range(loops):
-        book_in_fives.append(queryset[start:end])
-        start += 6
-        end += 6
+        book_in_number.append(queryset[start:end])
+        start += number
+        end += number
+    return book_in_number
 
-    context = {'book_in_fives': book_in_fives}
+
+def index(request):
+    queryset = models.Book.objects.all()
+    book_in_sixes = return_books_by_number(queryset, 6)
+    context = {'book_in_sixes': book_in_sixes}
     return render(request, 'index.html', context)
 
 
 def get_book(request, book_id):
+    rating_range = range(1, 6)
     book = get_object_or_404(models.Book, id=book_id)
     book_formats = book.format_set.all()
     book_reviews = book.review_set.all()
@@ -37,17 +42,18 @@ def get_book(request, book_id):
     context = {'book': book,
                'book_formats': book_formats,
                'book_reviews': book_reviews,
-               'recommended_books': recommended_books}
+               'recommended_books': recommended_books,
+               'rating_range': rating_range,'avg': book.get_avg_rating(book_id)}
 
     return render(request, 'book.html', context)
 
 
 def get_author(request, author_id):
     queryset = get_object_or_404(models.Author, id=author_id)
-    books_by_author = queryset.book_set.all()
-
+    author_books = queryset.book_set.all()
+    book_in_fives_by_author = return_books_by_number(author_books, 5)
     context = {'queryset': queryset,
-               'books_by_author': books_by_author}
+               'book_in_fives_by_author': book_in_fives_by_author}
 
     return render(request, 'author.html', context)
 

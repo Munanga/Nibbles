@@ -5,17 +5,16 @@
 {% block body %}
 
     <div class="container">
-
         {% if book %}
             <!-- Display Book details -->
             <div class="book_details">
                 <div class="row">
                 <!-- Display Book Image -->
-                    <div class="col-md-6">
+                    <div class="col-md-4 offset-md-2">
                         <div class="large_book_image">
                             <figure class="figure">
                                 <div class="nang">
-                                  <img src="/{{ book.image }}" class="figure-img img-fluid" alt="{{ book.title }}" style="width:290px;height:411px;"><br>
+                                  <img src="/{{ book.image }}" class="figure-img img-fluid shadow-lg" alt="{{ book.title }}" style="width:290px;height:411px;"><br>
                                 </div>
                             </figure>
                         </div>
@@ -52,6 +51,7 @@
 
                         <hr size="10">
                         <span style="color: steelblue"><a href="#reviews">{{ book.review_set.count }} Customer Reviews</a></span>
+                        <p><h5>Average rating: <span style="color: darkorange">{{ avg }}</span></h5></p>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,12 @@
                         {% for reviews in book_reviews %}
                         <div class="col-md-6">
                             <p align="justify"><img src="{% static 'images/profile/Avatar_empty.png' %}">&nbsp;{{ reviews.reviewer }}<br>
-                                {{ reviews.date| timesince }}
+                                <span class="font-weight-light">{{ reviews.date| timesince }} ago</span><br>
+                                {% for rating in rating_range %}
+                                    {% if reviews.rating >= rating %}
+                                        <span class="fa fa-star checked"></span>
+                                    {% endif %}
+                                {% endfor %}
                             </p>
                         </div>
 

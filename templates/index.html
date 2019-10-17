@@ -13,8 +13,8 @@
     </div>
 
 
-    {% if book_in_fives %}
-        {% for list in book_in_fives %}
+    {% if book_in_sixes %}
+        {% for list in book_in_sixes %}
             <div class="row ">
                 {% for book in list %}
                     <div class="col-md-2">
@@ -37,6 +37,7 @@
     {% else %}
         <p>No books to display yet</p>
     {% endif %}
+
 
 
 {% endblock %}

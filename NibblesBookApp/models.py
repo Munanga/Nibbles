@@ -48,6 +48,17 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    ''' get average rating of a book '''
+    def get_avg_rating(self, book_id):
+        book = Book.objects.get(id=book_id)
+        rating_sum = 0
+        all_reviews = book.review_set.all()
+        num_of_reviews = all_reviews.count()
+        for ratings in all_reviews:
+            rating_sum = rating_sum + ratings.rating
+
+        return "%.1f" % (rating_sum / num_of_reviews)
+
 
 class Format(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
@@ -64,7 +75,9 @@ class Review(models.Model):
     reviewer = models.CharField(max_length=50)
     date = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    content = models.CharField(max_length=600, default='Good read!')
+    rating = models.PositiveSmallIntegerField(default=1)
+    title = models.CharField(max_length=30, default='Good read!')
+    content = models.TextField(max_length=800, default='This was a good book to read!')
 
     def __str__(self):
         return self.book.title
