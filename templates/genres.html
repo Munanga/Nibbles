@@ -20,7 +20,7 @@
                     </a>
                     <figcaption class="figure-caption">
                         {{ book.date |date:'M Y' }}<br>
-                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.id %}">{{ book.author }}</a></span>
+                        <span class="blog-post-meta">By <a href="{% url 'NibblesBookApp:get_author' book.author_id %}">{{ book.author }}</a></span>
                     </figcaption>
                 </figure>
             </div>
