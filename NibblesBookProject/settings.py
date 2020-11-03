@@ -23,11 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6=%rr!pgbg0ew4)h&h3&(3%u)6yf!#ou5571-w0_kbq%!$a9n5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = 0
 
-#os.environ['https://nibblesapp.azurewebsites.net/']
+os.environ['nibblesapp.azurewebsites.net']
 #ALLOWED_HOSTS = ["Munanga.pythonanywhere.com", "127.0.0.1"]
 ALLOWED_HOSTS = ["nibblesapp.azurewebsites.net"]
+
+db_server = os.environ['SECRET_KEY']
 
 # Application definition
 
