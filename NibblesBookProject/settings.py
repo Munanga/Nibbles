@@ -25,6 +25,7 @@ SECRET_KEY = '6=%rr!pgbg0ew4)h&h3&(3%u)6yf!#ou5571-w0_kbq%!$a9n5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+os.environ['WEBSITE_HOSTNAME']
 #ALLOWED_HOSTS = ["Munanga.pythonanywhere.com", "127.0.0.1"]
 ALLOWED_HOSTS = ["*"]
 
